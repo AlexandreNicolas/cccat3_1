@@ -1,6 +1,9 @@
+import Item from "../src/Item";
 import OrderItem from "../src/OrderItem";
 
-test("Deve criar um item de pedido", function () {
-    const orderItem = new OrderItem(1, 1000, 2);
-    expect(orderItem.getTotal()).toBe(2000);
+test("Create Order of items", function () {
+  const guitarItem = new Item(1, "Music", "Guitar", 200);
+  const orderItem = new OrderItem(guitarItem, 2);
+  const totalOrder = orderItem.getTotalOrder(); 
+  expect(totalOrder).toBe(400);
 });

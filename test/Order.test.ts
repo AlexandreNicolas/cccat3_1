@@ -2,30 +2,29 @@ import Coupon from "../src/Coupon";
 import Item from "../src/Item";
 import Order from "../src/Order";
 
-test("Não deve criar um pedido com CPF inválido", function () {
-    expect(() => new Order("111.111.111-11")).toThrow(new Error("Invalid cpf"));
+test("Criar pedido com cpf válido", function() {
+  const order = new Order("847.903.332-05");
+  expect(order).toBeDefined()
 });
 
-test("Deve criar um pedido", function () {
-    const order = new Order("847.903.332-05");
-    expect(order).toBeDefined();
+test("Adicionando 3 item no pedido", function() {
+  const order = new Order("847.903.332-05");
+  const item_guitar = new Item(1, "Music", "Guitar", 120.12);
+  const item_baixo = new Item(2, "Music", "Baixo", 200);
+  const item_amplifier = new Item(3, "Music", "Amplifier", 50);
+  order.addItem(item_guitar, 1);
+  order.addItem(item_baixo, 2);
+  order.addItem(item_amplifier, 3);
+  const total_order = order.getTotal();
+  expect(total_order).toBe(670.12)
 });
 
-test("Deve criar um pedido com 3 itens", function () {
-    const order = new Order("847.903.332-05");
-    order.addItem(new Item(1, "Instrumentos Musicais", "Guitarra", 1000), 1);
-    order.addItem(new Item(2, "Instrumentos Musicais", "Amplificador", 5000), 1);
-    order.addItem(new Item(3, "Instrumentos Musicais", "Cabo", 30), 3);
-    const total = order.getTotal();
-    expect(total).toBe(6090);
-});
-
-test("Deve criar um pedido com 3 itens com cupom de desconto", function () {
-    const order = new Order("847.903.332-05");
-    order.addItem(new Item(1, "Instrumentos Musicais", "Guitarra", 1000), 1);
-    order.addItem(new Item(2, "Instrumentos Musicais", "Amplificador", 5000), 1);
-    order.addItem(new Item(3, "Instrumentos Musicais", "Cabo", 30), 3);
-    order.addCoupon(new Coupon("VALE20", 20));
-    const total = order.getTotal();
-    expect(total).toBe(4872);
+test("Add coupon in the order", function() {
+  const order = new Order("847.903.332-05");
+  const item_guitar = new Item(1, "Music", "Guitar", 100);
+  const coupon_20_percent = new Coupon("PROMO20", 20);
+  order.addItem(item_guitar, 1);
+  order.addCoupon(coupon_20_percent)
+  const total_order = order.getTotal();
+  expect(total_order).toBe(80);
 });

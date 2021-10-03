@@ -1,5 +1,5 @@
 export default class Coupon {
 
-    constructor (readonly code: string, readonly percentage: number) {
-    }
+  constructor(readonly description: string, readonly percent: number) {
+  }
 }
