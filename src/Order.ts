@@ -6,13 +6,16 @@ export default class Order {
   cpf: Cpf;
   orderItem: OrderItem[];
   coupon: Coupon | undefined;
+  freight: number;
 
   constructor(cpf: string, readonly issueDate: Date = new Date()) {
     this.cpf = new Cpf(cpf);
     this.orderItem = []
+    this.freight = 0;
   }
 
   addItem(item: Item, quantity: number) {
+    this.freight += item.getFreight() * quantity;
     const order = new OrderItem(item, quantity)
     this.orderItem.push(order);
   }
@@ -20,6 +23,10 @@ export default class Order {
   addCoupon(coupon: Coupon) {
     if(coupon.isCouponExpired(this.issueDate)) return;
     this.coupon = coupon;
+  }
+
+  getFreight() {
+    return this.freight.toFixed(2);
   }
 
   getTotal(): number {
