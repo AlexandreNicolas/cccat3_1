@@ -20,11 +20,22 @@ test("Adicionando 3 item no pedido", function() {
 });
 
 test("Add coupon in the order", function() {
-  const order = new Order("847.903.332-05");
+  const order = new Order("847.903.332-05", new Date("2021-05-03"));
   const item_guitar = new Item(1, "Music", "Guitar", 100);
-  const coupon_20_percent = new Coupon("PROMO20", 20);
+  const coupon_20_percent = new Coupon("PROMO20", 20, new Date("2021-06-06"));
   order.addItem(item_guitar, 1);
   order.addCoupon(coupon_20_percent)
   const total_order = order.getTotal();
   expect(total_order).toBe(80);
 });
+
+test("Add coupon expired in the order", function () {
+  const order = new Order("847.903.332-05", new Date("2021-03-02"));
+  const item_guitar = new Item(1, "Music", "Guitar", 100);
+  const coupon_20_percent = new Coupon("PROMO20", 20, new Date("2021-02-05"));
+  order.addItem(item_guitar, 1);
+  order.addCoupon(coupon_20_percent)
+  const total_order = order.getTotal();
+  expect(total_order).toBe(100);
+  
+})
