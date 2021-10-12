@@ -7,9 +7,12 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: example
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 12345
     ports:
       - 5432:5432
+    volumes:
+      - ./database/create.sql:/docker-entrypoint-initdb.d/create.sql
 
   adminer:
     image: adminer

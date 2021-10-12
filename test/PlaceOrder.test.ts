@@ -2,7 +2,7 @@ import PlaceOrder from "../src/PlaceOrder";
 import { ItemRepositoryMemory } from "../src/ItemRepositoryMemory";
 import OrderRepositoryMemory from "../src/OrderRepositoryMemory";
 
-test("Place Order", async function() {
+test("Place Order by memory", async function() {
   const input = {
     cpf: "847.903.332-05",
     orderItems: [
