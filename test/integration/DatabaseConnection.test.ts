@@ -1,4 +1,4 @@
-import DatabaseConnectionAdapter from "../src/DatabaseConnectionAdapter";
+import DatabaseConnectionAdapter from "../../src/infra/database/DatabaseConnectionAdapter";
 
 test("create database connection", async function () {
   const db = new DatabaseConnectionAdapter();

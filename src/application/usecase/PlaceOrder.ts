@@ -1,7 +1,7 @@
-import ItemRepository from "./ItemRepository";
-import Order from "./Order";
-import OrderRepository from "./OrderRepository";
-import PlaceOrderInput from "./PlaceOrderInput";
+import Order from "../../domain/entity/Order";
+import ItemRepository from "../../domain/repository/ItemRepository";
+import OrderRepository from "../../domain/repository/OrderRepository";
+import PlaceOrderInput from "../dto/PlaceOrderInput";
 
 export default class PlaceOrder {
   constructor(

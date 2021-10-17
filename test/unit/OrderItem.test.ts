@@ -1,5 +1,5 @@
-import Item from "../src/Item";
-import OrderItem from "../src/OrderItem";
+import Item from "../../src/domain/entity/Item";
+import OrderItem from "../../src/domain/entity/OrderItem";
 
 test("Create Order of items", function () {
   const guitarItem = new Item(1, "Music", "Guitar", 200, 1, 2, 3, 4);

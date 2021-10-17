@@ -7,11 +7,13 @@ export default class Order {
   orderItem: OrderItem[];
   coupon: Coupon | undefined;
   freight: number;
+  code: string;
 
   constructor(cpf: string, readonly issueDate: Date = new Date()) {
     this.cpf = new Cpf(cpf);
     this.orderItem = []
     this.freight = 0;
+    this.code = "AAAAPPPPPPPP"
   }
 
   addItem(item: Item, quantity: number) {
