@@ -10,4 +10,8 @@ export default class Coupon {
     if (!this.expiredData) return false;
     return this.expiredData.getTime() < today.getTime();
   }
+
+  isValid (today: Date = new Date()) {
+		return !this.isCouponExpired(today);
+	}
 }

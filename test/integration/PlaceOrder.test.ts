@@ -3,6 +3,8 @@ import ItemRepositoryDatabase from "../../src/infra/repository/database/ItemRepo
 import { ItemRepositoryMemory } from "../../src/infra/repository/memory/ItemRepositoryMemory";
 import OrderRepositoryDatabase from "../../src/infra/repository/database/OrderRepositoryDatabase";
 import OrderRepositoryMemory from "../../src/infra/repository/memory/OrderRepositoryMemory";
+import CouponRepositoryDatabase from "../../src/infra/repository/database/CouponRepositoryDatabase";
+import DatabaseConnectionAdapter from "../../src/infra/database/DatabaseConnectionAdapter";
 
 test("Place Order by memory", async function() {
   const input = {
@@ -20,13 +22,17 @@ test("Place Order by memory", async function() {
         id: 3,
         quantity: 3
       }
-    ]
+    ],
+    issueDate: new Date("2020-10-09"),
+    coupon: "VALE20"
   }
+  const databaseConnection = new DatabaseConnectionAdapter();
   const itemRepository = new ItemRepositoryMemory();
   const orderRepository = new OrderRepositoryMemory();
-  const placeOrder = new PlaceOrder(itemRepository, orderRepository);
+  const couponRepository = new CouponRepositoryDatabase(databaseConnection);
+  const placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
   const output = await placeOrder.execute(input);
-  expect(output.total).toBe(470.12);
+  expect(output.total).toBe(4872);
 });
 
 test("Place Order get and save by database", async function() {
@@ -45,11 +51,15 @@ test("Place Order get and save by database", async function() {
         id: 3,
         quantity: 3
       }
-    ]
+    ],
+    issueDate: new Date("2019-03-09"),
+    coupon: "VALE20"
   }
-  const itemRepository = new ItemRepositoryDatabase();
-  const orderRepository = new OrderRepositoryMemory();
-  const placeOrder = new PlaceOrder(itemRepository, orderRepository);
+  const databaseConnection = new DatabaseConnectionAdapter();
+  const itemRepository = new ItemRepositoryDatabase(databaseConnection);
+  const orderRepository = new OrderRepositoryDatabase(databaseConnection);
+  const couponRepository = new CouponRepositoryDatabase(databaseConnection);
+  const placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
   const output = await placeOrder.execute(input);
-  expect(output.total).toBe(6090);
+  expect(output.total).toBe(4872);
 });

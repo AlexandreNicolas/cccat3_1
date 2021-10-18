@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "tsc && jest ./dist",
+    "test-one": "tsc && jest -t 'Place Order get and save by database'",
     "coverage": "tsc && jest ./dist --coverage"
   },
   "keywords": [],

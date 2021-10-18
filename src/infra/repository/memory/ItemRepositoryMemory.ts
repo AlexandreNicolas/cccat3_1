@@ -6,9 +6,9 @@ export class ItemRepositoryMemory implements ItemRepository {
 
   constructor() {
     this.items = [
-      new Item(1, "Music", "Guitar", 120.12, 1, 2, 3, 4),
-      new Item(2, "Music", "Baixo", 200, 1, 2, 3, 4),
-      new Item(3, "Music", "Amplifier", 50, 1, 2, 3, 4)
+      new Item(1, "Instrumentos Musicais", "Guitar", 1000, 100, 50, 15, 3),
+      new Item(2, "Instrumentos Musicais", "Amplificador", 5000, 50, 50, 50, 22),
+      new Item(3, "Acessórios", "Cabo", 30, 10, 10, 10, 1)
     ]
     
   }

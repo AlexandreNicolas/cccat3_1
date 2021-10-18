@@ -4,9 +4,8 @@ import DatabaseConnectionAdapter from "../../database/DatabaseConnectionAdapter"
 import Item from "../../../domain/entity/Item";
 
 export default class ItemRepositoryDatabase implements ItemRepository {
-  databaseConnection: DatabaseConnection;
-  constructor(){
-    this.databaseConnection = new DatabaseConnectionAdapter();
+
+  constructor( readonly databaseConnection = new DatabaseConnectionAdapter()){    
   }
   async findItemById(id: number): Promise<Item> {
     const [itemData] = await this.databaseConnection.query("select * from ccca.item where id = $1", [id]);
