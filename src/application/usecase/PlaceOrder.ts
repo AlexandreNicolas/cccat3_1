@@ -3,6 +3,8 @@ import couponRepository from "../../domain/repository/CouponRepository";
 import ItemRepository from "../../domain/repository/ItemRepository";
 import OrderRepository from "../../domain/repository/OrderRepository";
 import PlaceOrderInput from "../dto/PlaceOrderInput";
+import PlaceOrderOutput from "../dto/PlaceOrderOutput";
+import PlaceOrderOutputAssembler from "../dto/PlaceOrderOutputAssembler";
 
 export default class PlaceOrder {
   constructor(
@@ -11,7 +13,7 @@ export default class PlaceOrder {
     readonly couponRepository: couponRepository
     ){
   }
-  async execute(input: PlaceOrderInput): Promise<any> {
+  async execute(input: PlaceOrderInput): Promise<PlaceOrderOutput> {
     const order = new Order(input.cpf, input.issueDate);
 
     for(const orderItem of input.orderItems) {
@@ -23,8 +25,7 @@ export default class PlaceOrder {
       order.addCoupon(coupon);
     }
     this.orderRepository.saveOrder(order)
-    return {
-      total: order.getTotal()
-    }
+    const output = PlaceOrderOutputAssembler.assembler(order);
+    return output;
   }
 }

@@ -7,7 +7,7 @@ export default class Order {
   cpf: Cpf;
   orderItems: OrderItem[];
   private coupon: Coupon | undefined;
-  freight: number;
+  private freight: number;
   private code: OrderCode;
 
   constructor(cpf: string, readonly issueDate: Date = new Date(), sequence: number = 1) {

@@ -11,6 +11,6 @@ export default class OrderRepositoryDatabase implements OrderRepository{
     await this.databaseConnection.query("insert into \
       ccca.order (coupon, code, cpf, issue_date, freight) \
       values ($1, $2, $3, $4, $5)", 
-      [order.getCoupon(), order.getCode(), order.cpf.value, order.issueDate, order.freight]);
+      [order.getCoupon(), order.getCode(), order.cpf.value, order.issueDate, order.getFreight()]);
   }
 }

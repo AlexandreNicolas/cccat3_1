@@ -33,6 +33,7 @@ test("Place Order by memory", async function() {
   const placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
   const output = await placeOrder.execute(input);
   expect(output.total).toBe(4872);
+  expect(output.code).toBe("202000000001");
 });
 
 test("Place Order get and save by database", async function() {
@@ -62,4 +63,5 @@ test("Place Order get and save by database", async function() {
   const placeOrder = new PlaceOrder(itemRepository, orderRepository, couponRepository);
   const output = await placeOrder.execute(input);
   expect(output.total).toBe(4872);
+  expect(output.code).toBe("201900000001");
 });
